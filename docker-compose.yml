@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+
+  db:
+    container_name: postgres
+    restart: always
+    build: ./postgresql
+    environment:
+      - POSTGRES_USER=webapp
+      - POSTGRES_DB=webapp
+      - POSTGRES_PASSWORD=webapp
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+
+  geoserver:
+    container_name: geoserver
+    build: ./tomcat
+    volumes: 
+      - tomcat-conf:/usr/local/tomcat/conf
+      - geoserver:/usr/local/tomcat/webapps
+      - ../data:/usr/local/webapp-data
+    ports:
+      - 8080:8080
+
+  web:
+    container_name: apache
+    build: ./apache
+    volumes: 
+      - ../app:/usr/local/apache2/htdocs/
+    ports:
+      - 8081:80
+
+volumes: 
+  postgres-data:
+  tomcat-conf:
+  geoserver:
+  webapp:
+  app:
