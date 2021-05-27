@@ -8,10 +8,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y postgis postgre
 #ADD init-user-db.sh /docker-entrypoint-initdb.d/
 #ADD init-db-postgis.sh /docker-entrypoint-initdb.d/
 
-#add SQL scripts to execute once the database has been created
-COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/
-COPY ./update-postgis.sh /docker-entrypoint-initdb.d/
-COPY ./sql/* /docker-entrypoint-initdb.d/
+#add shell scripts to execute once the database has been created
+COPY ./init/* /docker-entrypoint-initdb.d/
 
 RUN ls -la /docker-entrypoint-initdb.d/
 
