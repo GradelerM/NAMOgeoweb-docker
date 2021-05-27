@@ -1,5 +1,8 @@
 #!/bin/bash
-set -e
+set -
+
+#check when the script is being executed
+echo "Executing init-user-db.sh"
 
 #create webadmin role
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL

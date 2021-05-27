@@ -15,16 +15,6 @@ services:
     ports:
       - 5431:5432
 
-  geoserver:
-    container_name: geoserver
-    build: ./tomcat
-    volumes: 
-      - tomcat-conf:/usr/local/tomcat/conf
-      - geoserver:/usr/local/tomcat/webapps
-      - ../data:/usr/local/webapp-data
-    ports:
-      - 8080:8080
-
   web:
     container_name: apache
     build: ./apache
@@ -35,7 +25,5 @@ services:
 
 volumes: 
   postgres-data:
-  tomcat-conf:
-  geoserver:
   webapp:
   app:
