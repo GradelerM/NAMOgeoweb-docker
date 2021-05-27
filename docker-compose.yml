@@ -7,23 +7,23 @@ services:
     restart: always
     build: ./postgresql
     environment:
-      - POSTGRES_USER=webapp
-      - POSTGRES_DB=webapp
-      - POSTGRES_PASSWORD=webapp
-    volumes: 
-      - postgres-data:/var/lib/postgresql/data
+      - POSTGRES_USER=namo
+      - POSTGRES_DB=namo
+      - POSTGRES_PASSWORD=namo
+    #volumes: 
+    #  - postgres-data:/var/lib/postgresql/data
     ports:
       - 5431:5432
 
   web:
     container_name: apache
     build: ./apache
-    volumes: 
-      - ../app:/usr/local/apache2/htdocs/
+    #volumes: 
+    #  - ../app:/usr/local/apache2/htdocs/
     ports:
       - 8081:80
 
-volumes: 
-  postgres-data:
-  webapp:
-  app:
+#volumes: 
+  #postgres-data:
+  #webapp:
+  #app:
