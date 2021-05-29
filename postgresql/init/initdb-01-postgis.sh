@@ -1,4 +1,3 @@
-
 #!/bin/sh
 
 set -e
@@ -21,5 +20,12 @@ for DB in template_postgis "$POSTGRES_DB"; do
 		CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
 EOSQL
+done
 
+# Create pgcrypto extension
+for DB in template_postgis "$POSTGRES_DB"; do
+	echo "Loading pgcrypto extensions into $DB"
+	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
+		CREATE EXTENSION IF NOT EXISTS pgcrypto;
+EOSQL
 done

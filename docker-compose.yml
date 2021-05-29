@@ -3,29 +3,33 @@ version: '3.3'
 services:
 
   db:
-    container_name: postgres
+    container_name: namo-postgres
     restart: always
     build: ./postgresql
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - FIRST_ADMIN_PASSWORD=${FIRST_ADMIN_PASSWORD}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - ADMIN_MAIL=${ADMIN_MAIL}
       - WEBCONNEXION_PASSWORD=${WEBCONNEXION_PASSWORD}
-    #volumes: 
-    #  - postgres-data:/var/lib/postgresql/data
+    volumes: 
+      - namo-database:/var/lib/postgresql/data
     ports:
       - 5431:5432
 
   web:
-    container_name: apache
+    container_name: namo-php
     build: ./apache
-    #volumes: 
-    #  - ../app:/usr/local/apache2/htdocs/
+    depends_on:
+      - db
+    volumes: 
+      - namo-app:/var/www/html
+    restart: always
     ports:
       - 8081:80
 
-#volumes: 
-  #postgres-data:
-  #webapp:
-  #app:
+volumes: 
+  namo-database:
+  namo-app:

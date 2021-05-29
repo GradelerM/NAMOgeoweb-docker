@@ -31,6 +31,12 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         IS 'Table in which usernames, passwords and mails are stores. EDIT WITH CAUTION.';
 EOSQL
 
+# Allow the first admin user to login in NAMO GeoWeb
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    INSERT INTO userdata.users(username, password, email, role, user_enabled, motivation)
+	VALUES ('$ADMIN_USERNAME', encode(digest('$ADMIN_PASSWORD', 'sha256'), 'hex'), '$ADMIN_MAIL', 'admin', true, 'First admin');
+EOSQL
+
 # Collections
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE TABLE userdata.collections
@@ -54,6 +60,12 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 
     COMMENT ON TABLE userdata.collections
         IS 'This table contains the collections in which the books can be classified.';
+EOSQL
+
+# Create the default "Aucune" collection
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    INSERT INTO userdata.collections(name, position)
+	VALUES ('Aucune', 0);
 EOSQL
 
 # Books
@@ -190,6 +202,12 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         IS 'Table to store all the themes created in the application, for displaying the layers.';
 EOSQL
 
+# Create the default "Autres" theme
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    INSERT INTO geodata.themes(theme, position)
+	VALUES ('Autres', 0);
+EOSQL
+
 # Server types
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE TABLE geodata."serverType"
@@ -212,6 +230,17 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 
     COMMENT ON TABLE geodata."serverType"
         IS 'All the available server types in OpenLayers, including the "other" option.';
+EOSQL
+
+# Add all the supported server types
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    INSERT INTO geodata."serverType"(type)
+        VALUES 
+            ('other'),
+            ('carmentaserver'),
+            ('geoserver'),
+            ('mapserver'),
+            ('qgis');
 EOSQL
 
 # Servers

@@ -54,16 +54,16 @@ EOSQL
 
 # Create first admin user
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    CREATE ROLE first_admin WITH
+    CREATE ROLE $ADMIN_USERNAME WITH
         LOGIN
         NOSUPERUSER
         INHERIT
         CREATEDB
         CREATEROLE
         NOREPLICATION
-        ENCRYPTED PASSWORD '$FIRST_ADMIN_PASSWORD';
-    GRANT admins TO first_admin;
-    COMMENT ON ROLE first_admin IS 'Default admin with all rights.';
+        ENCRYPTED PASSWORD '$ADMIN_PASSWORD';
+    GRANT admins TO $ADMIN_USERNAME;
+    COMMENT ON ROLE $ADMIN_USERNAME IS 'Default admin with all rights.';
 EOSQL
 
 # Create web connexion
