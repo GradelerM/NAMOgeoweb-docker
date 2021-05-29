@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y postgis postgre
 
 # Add shell scripts to execute once the database has been created
 COPY ./init/* /docker-entrypoint-initdb.d/
-RUN ls -la /docker-entrypoint-initdb.d/
 
 #clean up
 RUN apt-get -y --purge autoremove &&\
