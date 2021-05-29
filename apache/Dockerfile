@@ -8,13 +8,20 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gettext pdo_pgsql pgsql
 
 # Install git for cloning
-RUN apt-get update && apt-get install --no-install-recommends -y git ca-certificates
+RUN apt-get update && apt-get install --no-install-recommends -y git ca-certificates zlib1g-dev libzip-dev sendmail
+
+# Config sendmail
+RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/sendmail.ini 
+RUN sed -i '/#!\/bin\/sh/aservice sendmail restart' /usr/local/bin/docker-php-entrypoint
+RUN sed -i '/#!\/bin\/sh/aecho "$(hostname -i)\t$(hostname) $(hostname).localhost" >> /etc/hosts' /usr/local/bin/docker-php-entrypoint
+
 
 # Go to the htdocs directory
 WORKDIR /var/www/html
 
 # Clone from the NAMOgeoweb repo
 RUN git clone https://github.com/GradelerM/NAMOgeoweb.git
+# Basculer sur dev ?
 
 # Get the application out of the "NAMOgeoweb" dir
 WORKDIR /var/www/html/NAMOgeoweb
@@ -24,9 +31,13 @@ RUN mv * ../
 WORKDIR /var/www/html
 RUN rm -rf ./NAMOgeoweb
 
-# Add the config.php file to the directory
-COPY ./config.php /var/www/html/map
-COPY ./info.php /var/www/html
+# Add the config files to the application
+COPY ./init/config.php /var/www/html/map
+COPY ./init/palette.css /var/www/html/map/styles
+
+# Make sure www-data owns the files
+WORKDIR /var/www
+RUN chown -R www-data:www-data html
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
