@@ -1,0 +1,30 @@
+<!-- Add here the regions of interest you want to be able to zoom in -->
+<!-- Dont forget to add the matching thumbnails in the "thumbnail" folder -->
+<!-- More informations on the NAMO GeoWeb Docker Wiki: https://github.com/GradelerM/NAMOgeoweb-docker/wiki -->
+
+<!-- empriseWorld thumbnail -->
+<div class="tab-box">
+    <div class="box-title">
+    <p>Mappemonde</p> <!-- Name of your region -->
+    <a href="#"><svg class="info-link"><use xlink:href="#iconeInfo" /></use></svg></a>
+    </div>
+    <a id="empriseWorld-zoom" class="emprise" href="#">
+    <div class="emprise-thumbnail">
+        <img src="images/assets/thumbnails/empriseWorld_thumbnail.png" />
+    </div>
+    <div class="emprise-thumbnail-banner">
+        <p>Cliquez pour zoomer</p>
+    </div>
+    </a>
+</div>
+
+<script>
+// Add here the longitude, latitude and zoom level of the area of interest you declared above
+// [ol.proj.fromLonLat([lon, lat]), zoom]
+// lon and lat in EPSG:4326 (WGS84, NOT web-mercator)
+// zoom is the desired zoom level
+
+// empriseWorld values
+var empriseWorld = [ol.proj.fromLonLat([-17.2,43.6]), 2];
+
+</script>

@@ -1,0 +1,1 @@
+# This file prevents docker-compose errors in case the directory is empty

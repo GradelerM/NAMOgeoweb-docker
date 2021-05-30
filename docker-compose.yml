@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   db:
-    container_name: namo-postgres
+    container_name: namo_db
     restart: always
     build: ./postgresql
     environment:
@@ -17,19 +17,19 @@ services:
     volumes: 
       - namo-database:/var/lib/postgresql/data
     ports:
-      - 5431:5432
+      - ${POSTGRES_PORT}:5432
 
   web:
-    container_name: namo-php
+    container_name: namo_web
     build: ./apache
     depends_on:
       - db
     volumes: 
-      - namo-app:/var/www/html
+      - namo-web:/var/www/html
     restart: always
     ports:
-      - 8081:80
+      - ${APACHE_PORT}:80
 
 volumes: 
   namo-database:
-  namo-app:
+  namo-web:

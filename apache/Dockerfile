@@ -33,7 +33,11 @@ RUN rm -rf ./NAMOgeoweb
 
 # Add the config files to the application
 COPY ./init/config.php /var/www/html/map
-COPY ./init/palette.css /var/www/html/map/styles
+COPY ./init/optional/palette.css /var/www/html/map/styles
+COPY ./init/optional/regions_of_interest.html /var/www/html/map
+COPY ./init/optional/thumbnails/* /var/www/html/map/images/assets/thumbnails/
+COPY ./init/optional/logos/* /var/www/html/map/images/assets/logos/
+COPY ./init/about.html /var/www/html/map/components
 
 # Make sure www-data owns the files
 WORKDIR /var/www
