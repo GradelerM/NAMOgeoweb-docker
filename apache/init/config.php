@@ -11,7 +11,7 @@ $vertical_logo='verticalNAMO.svg';
 $horizontal_logo='horizontalNAMO.svg';
 
 // Noreply mail origin (can keep default)
-$noreply_mail='noreply@namo'.$project_name.'.com';
+$noreply_mail='noreply@namo.com';
 
 // Link to repository
 // Default: NAMO official repositories
