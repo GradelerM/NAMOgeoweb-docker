@@ -15,13 +15,11 @@ RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/s
 RUN sed -i '/#!\/bin\/sh/aservice sendmail restart' /usr/local/bin/docker-php-entrypoint
 RUN sed -i '/#!\/bin\/sh/aecho "$(hostname -i)\t$(hostname) $(hostname).localhost" >> /etc/hosts' /usr/local/bin/docker-php-entrypoint
 
-
 # Go to the htdocs directory
 WORKDIR /var/www/html
 
 # Clone from the NAMOgeoweb repo
 RUN git clone https://github.com/GradelerM/NAMOgeoweb.git
-# Basculer sur dev ?
 
 # Get the application out of the "NAMOgeoweb" dir
 WORKDIR /var/www/html/NAMOgeoweb
