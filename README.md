@@ -127,3 +127,8 @@ L'application est toujours en cours de développement et c'est aussi le cas de c
 ### L'envoi des mails
 
 L'envoi des mails n'est pas encore complètement opérationnel sur NAMO GeoWeb via Docker. Les messages n'arrivent pas encore à destination 
+
+## Financements
+
+Le développement de la plateforme NAMO GeoWeb et NAMO GeoWeb Docker a été rendu possible par le projet FEDER Rivage porté par un consortium de recherche pluridisciplinaire et des bailleurs institutionnels dont les principaux sont la Région Guadeloupe et l'Union européenne de par le fonds Feder en Guadeloupe.
+NaMo GeoWeb se base sur une idée origonale de Marie Gradeler et Jean-Pierre Chéry pour le projet RestEAUr'Lag, sur des financements de la Foindation de France.
