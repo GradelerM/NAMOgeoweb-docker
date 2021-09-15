@@ -33,7 +33,7 @@ Vous pouvez conserver les valeurs par défaut pour tester l'application, mais il
 
 #### Le fichier .env
 
-Le premier et le plus important des fichiers de configuration à éditer.
+Le premier et le plus important des fichiers de configuration à éditer. A noter, vous pouvez consultez la liste des ports déjà utilisés avec la commande `ss -lptun` sur un terminal.
 
 `APACHE PORT` permet de configurer le port du container php:apache. Il est par défaut redirigé sur le port 8081 de la machine hôte.
 
