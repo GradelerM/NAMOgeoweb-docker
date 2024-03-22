@@ -71,7 +71,7 @@ Vous pouvez ensuite commencer à personnaliser votre instance de NAMO GeoWeb.
 
 #### Le fichier about.html
 
-Enfin, ouvrez le fichier `apache/init/optional/about.html`. Entrez ici des informations sur votre projet qui seront visibles quand l'utilisateur cliquera sur le bouton "A propos" du menu (texte à rédiger au [format HTML](https://w3tutoriels.com/html/html-formatage-texte/)).
+Enfin, ouvrez le fichier `apache/init/about.html`. Entrez ici des informations sur votre projet qui seront visibles quand l'utilisateur cliquera sur le bouton "A propos" du menu (texte à rédiger au [format HTML](https://w3tutoriels.com/html/html-formatage-texte/)).
 
 **Si vous souhaitez personnaliser votre instance NAMO GeoWeb, appliquez aussi une configuration optionnelle. Sinon, passez directement à l'étape "installation".**
 
