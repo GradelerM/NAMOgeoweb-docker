@@ -111,7 +111,7 @@ Exemple : `--main` correspond à la couleur dominante de l'application et s'app
 Une fois que vous avez terminé, ouvrez un terminal au niveau du fichier `docker-compose.yml` et lancez la commande suivante :
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 Attendez ensuite jusqu'à ce que vous voyiez apparaître la mention `database system is ready to accept connections`. Accédez ensuite à `localhost:8081` dans votre navigateur pour accéder à l'application.
